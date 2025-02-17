@@ -9,10 +9,10 @@
         v-for="card in cards"
         :key="card.id"
         :card="card"
-        @moveCard="onMoveCard"
+        @move-card="onMoveCard"
         @delete-card="onDeleteCard"
         @edit-card="onEditCard"
-        />
+/>
 
       </v-list>
     </v-card>
@@ -21,14 +21,13 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue';
-import KanbanCard from './KanbanCard.vue';
+import KanbanCard from '@/components/KanbanCard.vue';
 
 //props from KanbanBoard
 defineProps<{
   title: string;
   status: string;
   cards: { id: number; title: string; description: string; status: string }[];
-
 }>();
 
 //emits

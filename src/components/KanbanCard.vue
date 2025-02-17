@@ -13,6 +13,9 @@
       Move to {{ option.title }}
     </v-btn>
     </v-btn-group>
+
+    <v-btn class="mt-2" color="warning" small @click = 'editCard'> Edit</v-btn>
+    <v-btn class="mt-2" color="error" small @click = 'deleteCard'> Delete</v-btn>
   </v-card>
 </template>
 
@@ -20,11 +23,13 @@
 import { defineProps, defineEmits, computed } from 'vue';
 
 defineProps<{
-  card: { id:number; title: string; description: string; status: string};
+  card: { id: number; title: string; description: string; status: string };
 }>();
 
 const emit = defineEmits<{
 (event: 'move-card', cardId: number, newStatus: string): void;
+(event: 'delete-card', cardId: number): void;
+(event: 'edit-card', cardId: number): void;
 }>();
 
 const moveOptions = computed(() => {
@@ -34,9 +39,18 @@ const moveOptions = computed(() => {
    .map(status =>({ status, title: status.replace('-', '')}));
 });
 
+
 //function to move the card
 
 const moveCard = (newStatus: string) => {
   emit('move-card', card.id, newStatus);
+};
+
+const editCard = () => {
+  emit('edit-card', card.id);
+};
+
+const deleteCard = () => {
+  emit('delete-card', card.id);
 };
 </script>

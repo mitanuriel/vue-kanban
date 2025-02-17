@@ -36,7 +36,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import KanbanColumn from './KanbanColumn.vue';
+import KanbanColumn from '@/components/KanbanColumn.vue';
 
 const columns = ref ( [
   {id: 1, title: 'To do', status:'todo'},

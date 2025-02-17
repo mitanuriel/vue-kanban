@@ -10,6 +10,8 @@
         :key="card.id"
         :card="card"
         @moveCard="onMoveCard"
+        @delete-card="onDeleteCard"
+        @edit-card="onEditCard"
         />
 
       </v-list>
@@ -31,11 +33,22 @@ defineProps<{
 
 //emits
 const emit = defineEmits<{
-(event: 'move-card', cardId: number, newStatus: string):void;
+  (event: 'move-card', cardId: number, newStatus: string):void;
+  (event: 'delete-card', cardId: number): void;
+  (event: 'edit-card', cardId: number): void;
 }>();
 
 //function to pass move event to KanbanBoard
 const onMoveCard = (cardId: number, newStatus: string) => {
   emit('move-card', cardId, newStatus);
 };
+
+const onDeleteCard = (cardId: number) => {
+  emit('delete-card',cardId);
+};
+
+const onEditCard = (cardId: number) => {
+  emit('edit-card', cardId);
+};
+
 </script>

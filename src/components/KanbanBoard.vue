@@ -8,9 +8,28 @@
       :status="column.status"
       :cards="cards.filter(card => card.status === column.status)"
       @move-card="moveCard"
+      @delete-card="deleteCard"
+      @edit-card="editCard"
       />
 
     </v-row>
+//new card button
+    <v-btn class="mt-4" color="primary" @click="showAddDialog"=true>Add New Card</v-btn>
+
+    <v-dialog v-model="showAddDialog" max-width="500px">
+      <v-card>
+        <v-card-title> {{ editingCard ? 'edit Card' : 'Add New Card' }}</v-card-title>
+        <v-card-text>
+          <v-text-field v-model="cardTitle" label="Title"></v-text-field>
+          <v-textarea v-model="cardDescription" label="Description"></v-textarea>
+          <v-select v-model="cardStatus" :items="columns.map(c => c.status)" label="Status"></v-select>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn text @click="showAddDialog = false">Cancel</v-btn>
+          <v-btn color="primary" @click="saveCard">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -34,6 +53,11 @@ const cards = ref ( [
   {id:2, title: 'Second task', description: 'Another task in progress', status: 'in-progress'},
 
 ]);
+const showAddDialog = ref(false);
+const cardTitle = ref('');
+const cardDescription = ref('');
+const cardStatus = ref('todo');
+const editingCard = ref<number | null>(null);
 
 //function to move cards between columns
 
@@ -41,6 +65,50 @@ const moveCard = (cardId: number, newStatus: string) => {
   const card = cards.value.find(c => c.id === cardId);
   if(card) card.status = newStatus;
 
+};
+//function to delete cards
+
+const deleteCard = (cardId: number) => {
+  cards.value = cards.value.filter(card => card.id !== cardId);
+};
+
+//fuction to edit cards
+const editCard = (cardId: number) => {
+  const card = cards.value.find(c => c.id === cardId);
+  if (card) {
+    cardTitle.value = card.title;
+    cardDescription.value = card.description;
+    cardStatus.value = card.status;
+    editingCard.value = cardId;
+    showAddDialog.value = true;
+  }
+};
+
+const saveCard = () => {
+  if (editingCard.value !== null) {
+    // Editing an existing card
+    const card = cards.value.find(c => c.id === editingCard.value);
+    if (card) {
+      card.title = cardTitle.value;
+      card.description = cardDescription.value;
+      card.status = cardStatus.value;
+    }
+  } else {
+    // Adding a new card
+    const newCard = {
+      id: Date.now(),
+      title: cardTitle.value,
+      description: cardDescription.value,
+      status: cardStatus.value,
+    };
+    cards.value.push(newCard);
+  }
+
+cardTitle.value = '';
+  cardDescription.value = '';
+  cardStatus.value = 'todo';
+  editingCard.value = null;
+  showAddDialog.value = false;
 };
 
 </script>

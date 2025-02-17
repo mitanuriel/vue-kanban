@@ -14,7 +14,7 @@
 
     </v-row>
 //new card button
-    <v-btn class="mt-4" color="primary" @click="showAddDialog"=true>Add New Card</v-btn>
+    <v-btn class="mt-4" color="primary" @click="showAddDialog= true" >Add New Card</v-btn>
 
     <v-dialog v-model="showAddDialog" max-width="500px">
       <v-card>
@@ -25,7 +25,7 @@
           <v-select v-model="cardStatus" :items="columns.map(c => c.status)" label="Status"></v-select>
         </v-card-text>
         <v-card-actions>
-          <v-btn text @click="showAddDialog = false">Cancel</v-btn>
+          <v-btn variant="text" @click="showAddDialog = false">Cancel</v-btn>
           <v-btn color="primary" @click="saveCard">Save</v-btn>
         </v-card-actions>
       </v-card>

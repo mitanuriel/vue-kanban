@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, computed } from 'vue';
 
-defineProps<{
+const props = defineProps<{
   card: { id: number; title: string; description: string; status: string };
 }>();
 
@@ -35,7 +35,7 @@ const emit = defineEmits<{
 const moveOptions = computed(() => {
    const statuses = [ 'todo', 'in-progress', 'done'];
    return statuses
-   .filter (status => status !== card.status)
+   .filter (status => status !== props.card.status)
    .map(status =>({ status, title: status.replace('-', '')}));
 });
 
@@ -43,14 +43,14 @@ const moveOptions = computed(() => {
 //function to move the card
 
 const moveCard = (newStatus: string) => {
-  emit('move-card', card.id, newStatus);
+  emit('move-card', props.card.id, newStatus);
 };
 
 const editCard = () => {
-  emit('edit-card', card.id);
+  emit('edit-card', props.card.id);
 };
 
 const deleteCard = () => {
-  emit('delete-card', card.id);
+  emit('delete-card', props.card.id);
 };
 </script>

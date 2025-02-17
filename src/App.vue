@@ -1,20 +1,25 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+<script>
+
+export default {
+  name: "App",
+  components: "",
+
+},
+data(){
+return {
+  newTask: "",
+  arrBacklog: [
+    {name: "Code Sign Up Page"},
+    {name: "Test Dashboard"},
+    {name: "Style Register"},
+    {name: "Help page"},
+  ]
+}
+}
 </script>
 
 <template>
-  <header>
 
-
-    <div class="wrapper">
-
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
 
   <RouterView />
 </template>

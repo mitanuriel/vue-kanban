@@ -3,7 +3,7 @@
     <v-card-title> {{ card.title }}</v-card-title>
     <v-card-subtitle> {{ card.description }}</v-card-subtitle>
 
-    <v-btn-group class="mt-2" dense>
+    <div class="button-group">
       <v-btn
       v-for="option in moveOptions"
       :key="option.status"
@@ -12,7 +12,7 @@
       >
       Move to {{ option.title }}
     </v-btn>
-    </v-btn-group>
+  </div>
 
     <v-btn class="mt-2" color="warning" small @click = 'editCard'> Edit</v-btn>
     <v-btn class="mt-2" color="error" small @click = 'deleteCard'> Delete</v-btn>
@@ -33,10 +33,9 @@ const emit = defineEmits<{
 }>();
 
 const moveOptions = computed(() => {
-   const statuses = [ 'todo', 'in-progress', 'done'];
-   return statuses
-   .filter (status => status !== props.card.status)
-   .map(status =>({ status, title: status.replace('-', '')}));
+  return ['todo', 'in-progress', 'in-review', 'done']
+    .filter(status => status !== props.card.status)
+    .map(status => ({ status, title: status.replace('-', ' ') }));
 });
 
 
@@ -61,12 +60,13 @@ const deleteCard = () => {
   padding: 10px;
 }
 
-.v-btn-group {
-  display: flex;
-  flex-wrap: wrap;
-}
-
 .v-btn {
   margin-right: 5px;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 </style>

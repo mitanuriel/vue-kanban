@@ -1,19 +1,17 @@
 <template>
   <v-container>
-
     <v-row>
-      <KanbanColumn
-      v-for="column in columns"
-      :key="column.id"
+  <v-col v-for="column in columns" :key="column.id" cols="3">
+    <KanbanColumn
       :title="column.title"
       :status="column.status"
       :cards="cards.filter(card => card.status === column.status)"
       @move-card="moveCard"
       @delete-card="deleteCard"
       @edit-card="editCard"
-      />
-
-    </v-row>
+    />
+  </v-col>
+</v-row>
 //new card button
     <v-btn class="mt-4" color="primary" @click="showAddDialog= true" >Add New Card</v-btn>
 

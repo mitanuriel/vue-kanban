@@ -1,8 +1,13 @@
 <template>
-  <v-container>
+  <v-container fluid>
 
     <v-row class="kanban-board">
-      <v-col v-for="column in columns" :key="column.id" cols="3">
+      <v-col 
+      v-for="column in columns" 
+      :key="column.id" 
+      cols="3"
+      class="kanban-column"
+      >
         <v-card class="column-card" elevation="2">
           <v-card-title :class="'header-' + column.status">
             {{ column.title }}
@@ -123,14 +128,15 @@ cardTitle.value = '';
 
 </script>
 
-<style>
+<style scoped>
 h1 {
   margin-bottom: 20px;
 }
 
 .kanban-board {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding: 20px;
 }
 </style>
 

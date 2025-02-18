@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mb-2 pa-2 ">
+  <v-card class="kanban-card" elevation="2">
     <v-card-title> {{ card.title }}</v-card-title>
     <v-card-subtitle> {{ card.description }}</v-card-subtitle>
 
@@ -9,6 +9,7 @@
       :key="option.status"
       @click="moveCard(option.status)"
       small
+      color="secondary"
       >
       Move to {{ option.title }}
     </v-btn>
@@ -54,19 +55,22 @@ const deleteCard = () => {
 };
 </script>
 
-<style>
-.v-card {
+<style scoped>
+.kanban-card {
   background-color: white;
-  padding: 10px;
-}
-
-.v-btn {
-  margin-right: 5px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 }
 
 .button-group {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+}
+
+.v-btn {
+  margin-right: 5px;
 }
 </style>

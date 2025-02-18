@@ -51,15 +51,21 @@ const onEditCard = (cardId: number) => {
 
 </script>
 
-<style>
-.column-card {
-  min-height: 500px; 
-  width: 100%; 
+<style scoped>
+.kanban-column-card {
+  min-height: 600px;
   background-color: #f5f5f5;
+  padding: 15px;
   border-radius: 8px;
+}
+.column-header {
+  background-color: #2196F3;
+  color: white;
+  padding: 10px;
+  text-align: center;
 }
 
 .card-list {
-  margin-top: 10px;
+  min-height: 400px;
 }
 </style>

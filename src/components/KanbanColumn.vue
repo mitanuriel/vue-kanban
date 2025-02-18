@@ -1,6 +1,6 @@
 <template>
-  <v-col cols="4">
-    <v-card class="pa-3" elevation="2">
+ 
+    <v-card class="pa-3 column-card" elevation="2">
       <v-card-title class="text-center"> {{ title }}</v-card-title>
       <v-divider></v-divider>
 
@@ -16,7 +16,6 @@
 
       </v-list>
     </v-card>
-  </v-col>
 </template>
 
 <script setup lang="ts">
@@ -54,9 +53,10 @@ const onEditCard = (cardId: number) => {
 
 <style>
 .column-card {
-  min-height: 500px; /* Ensure columns are large enough */
-  width: 100%; /* Make columns fill their grid space */
+  min-height: 500px; 
+  width: 100%; 
   background-color: #f5f5f5;
+  border-radius: 8px;
 }
 
 .card-list {

@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h1 class="text-center">Kanban Board</h1>
 
     <v-row class="kanban-board">
       <v-col v-for="column in columns" :key="column.id" cols="3">

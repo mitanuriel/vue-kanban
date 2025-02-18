@@ -1,21 +1,14 @@
 <template>
   <v-container fluid>
 
-    <v-row class="kanban-board">
+    <v-row class="kanban-board" justify="space-around">
       <v-col 
       v-for="column in columns" 
       :key="column.id" 
       cols="3"
       class="kanban-column"
       >
-        <v-card class="column-card" elevation="2">
-          <v-card-title :class="'header-' + column.status">
-            {{ column.title }}
-            <span class="card-counter">({{ cards.filter(c => c.status === column.status).length }})</span>
-          </v-card-title>
-          <v-divider></v-divider>
-
-       <v-list dense class="card-list"> 
+      
         <KanbanColumn
       :title="column.title"
       :status="column.status"
@@ -24,26 +17,36 @@
       @delete-card="deleteCard"
       @edit-card="editCard"
     /> 
-      </v-list>
-    </v-card>
+     
   </v-col>
 </v-row>
-//new card button
-    <v-btn class="mt-4" color="primary" @click="showAddDialog= true" >Add New Card</v-btn>
+
+
+<v-row justify="center" class="mt-4">
+  <v-col cols="12" class="text-center">
+  <v-btn class="add-card-btn" color="primary" @click="showAddDialog= true">
+    Add New Card
+  </v-btn>
+</v-col>
+</v-row>
 
     <v-dialog v-model="showAddDialog" max-width="500px">
+      <v-container> 
       <v-card>
-        <v-card-title> {{ editingCard ? 'edit Card' : 'Add New Card' }}</v-card-title>
+        <v-card-title class="text-center"> 
+          {{ editingCard ? 'Edit Card' : 'Add New Card' }}
+        </v-card-title>
         <v-card-text>
           <v-text-field v-model="cardTitle" label="Title"></v-text-field>
           <v-textarea v-model="cardDescription" label="Description"></v-textarea>
           <v-select v-model="cardStatus" :items="columns.map(c => c.status)" label="Status"></v-select>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions class="justify-end">
           <v-btn variant="text" @click="showAddDialog = false">Cancel</v-btn>
           <v-btn color="primary" @click="saveCard">Save</v-btn>
         </v-card-actions>
       </v-card>
+    </v-container>
     </v-dialog>
   </v-container>
 </template>
@@ -56,8 +59,7 @@ import KanbanColumn from '@/components/KanbanColumn.vue';
 const columns = ref ( [
   {id: 1, title: 'To do', status:'todo'},
   {id: 2, title:'In Progress', status: 'in-progress' },
-  {id: 3, title: "In Review", status: 'in-review'},
-  {id: 4, title: 'Done', status: "done"},
+  {id: 3, title: 'Done', status: "done"},
 
 ]);
 
@@ -110,16 +112,15 @@ const saveCard = () => {
     }
   } else {
     // Adding a new card
-    const newCard = {
+    cards.value.push({
       id: Date.now(),
       title: cardTitle.value,
       description: cardDescription.value,
       status: cardStatus.value,
-    };
-    cards.value.push(newCard);
+    });
   }
 
-cardTitle.value = '';
+  cardTitle.value = '';
   cardDescription.value = '';
   cardStatus.value = 'todo';
   editingCard.value = null;
@@ -129,14 +130,32 @@ cardTitle.value = '';
 </script>
 
 <style scoped>
-h1 {
-  margin-bottom: 20px;
-}
 
 .kanban-board {
   display: flex;
+  gap: 20px;
   justify-content: space-around;
   padding: 20px;
+}
+
+.kanban-column {
+  flex: 1;
+  min-width: 250px;
+}
+
+.add-card-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #4CAF50 !important;
+  color: white !important;
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+}
+
+.add-card-btn:hover {
+  background-color: #388E3C !important;
 }
 </style>
 

@@ -1,6 +1,6 @@
 <template>
  
-    <v-card class="pa-3 column-card" elevation="2">
+    <v-card class="pa-3 column-card" elevation="2" style="min-height: 500px;">
       <v-card-title class="text-center"> {{ title }}</v-card-title>
       <v-divider></v-divider>
 
@@ -61,11 +61,12 @@ const onEditCard = (cardId: number) => {
 }
 
 .column-header {
-  background-color: #2196F3;
+  background-color: #3f51b5; /* Darker blue */
   color: white;
-  padding: 10px;
+  padding: 12px;
   text-align: center;
-  border-radius: 4px;
+  font-weight: bold;
+  border-radius: 6px 6px 0 0;
 }
 
 .card-list {

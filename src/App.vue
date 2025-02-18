@@ -3,7 +3,7 @@
 <template>
   <v-app>
     <v-container>
-      <h1 class="text-center">Kanban Board</h1>
+      <h1 class="text-center kanban-title">Kanban Board</h1>
       <KanbanBoard />
     </v-container>
   </v-app>
@@ -14,9 +14,11 @@ import KanbanBoard from './components/KanbanBoard.vue'
 
 </script>
 
-<style>
+<style scoped>
 
-h1 {
-  margin-top: 20px;
+.kanban-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 </style>

@@ -1,15 +1,27 @@
 <template>
   <v-container>
-    <v-row>
-  <v-col v-for="column in columns" :key="column.id" cols="3">
-    <KanbanColumn
+    <h1 class="text-center">Kanban Board</h1>
+
+    <v-row class="kanban-board">
+      <v-col v-for="column in columns" :key="column.id" cols="3">
+        <v-card class="column-card" elevation="2">
+          <v-card-title :class="'header-' + column.status">
+            {{ column.title }}
+            <span class="card-counter">({{ cards.filter(c => c.status === column.status).length }})</span>
+          </v-card-title>
+          <v-divider></v-divider>
+
+       <v-list dense class="card-list"> 
+        <KanbanColumn
       :title="column.title"
       :status="column.status"
       :cards="cards.filter(card => card.status === column.status)"
       @move-card="moveCard"
       @delete-card="deleteCard"
       @edit-card="editCard"
-    />
+    /> 
+      </v-list>
+    </v-card>
   </v-col>
 </v-row>
 //new card button

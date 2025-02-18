@@ -54,15 +54,18 @@ const onEditCard = (cardId: number) => {
 <style scoped>
 .kanban-column-card {
   min-height: 600px;
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
   padding: 15px;
   border-radius: 8px;
+  border: 2px solid #ccc;
 }
+
 .column-header {
   background-color: #2196F3;
   color: white;
   padding: 10px;
   text-align: center;
+  border-radius: 4px;
 }
 
 .card-list {

@@ -51,3 +51,15 @@ const onEditCard = (cardId: number) => {
 };
 
 </script>
+
+<style>
+.column-card {
+  min-height: 500px; /* Ensure columns are large enough */
+  width: 100%; /* Make columns fill their grid space */
+  background-color: #f5f5f5;
+}
+
+.card-list {
+  margin-top: 10px;
+}
+</style>

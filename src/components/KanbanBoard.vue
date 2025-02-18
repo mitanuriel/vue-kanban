@@ -1,5 +1,6 @@
 <template>
   <v-container>
+
     <v-row>
       <KanbanColumn
       v-for="column in columns"
@@ -112,4 +113,15 @@ cardTitle.value = '';
 };
 
 </script>
+
+<style>
+h1 {
+  margin-bottom: 20px;
+}
+
+.kanban-board {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
 

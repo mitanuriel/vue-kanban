@@ -54,3 +54,19 @@ const deleteCard = () => {
   emit('delete-card', props.card.id);
 };
 </script>
+
+<style>
+.v-card {
+  background-color: white;
+  padding: 10px;
+}
+
+.v-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.v-btn {
+  margin-right: 5px;
+}
+</style>

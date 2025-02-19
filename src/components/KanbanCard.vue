@@ -1,7 +1,6 @@
 <template>
   <v-card class="kanban-card" elevation="2">
-    <v-card-title> {{ card.title }}</v-card-title>
-    <v-card-subtitle> {{ card.description }}</v-card-subtitle>
+  
 
     <div class="button-group">
       <v-btn
@@ -34,7 +33,7 @@ const emit = defineEmits<{
 }>();
 
 const moveOptions = computed(() => {
-  return ['todo', 'in-progress', 'in-review', 'done']
+  return ['todo', 'in-progress', 'done']
     .filter(status => status !== props.card.status)
     .map(status => ({ status, title: status.replace('-', ' ') }));
 });
@@ -60,8 +59,9 @@ const deleteCard = () => {
   background-color: white;
   padding: 15px;
   border-radius: 8px;
+  border: 1px solid #ddd;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .button-group {

@@ -1,6 +1,6 @@
 <template>
  
-    <v-card class="pa-3 column-card" elevation="2" style="min-height: 500px;">
+    <v-card class="pa-3 column-card" elevation="2">
       <v-card-title class="text-center"> {{ title }}</v-card-title>
       <v-divider></v-divider>
 

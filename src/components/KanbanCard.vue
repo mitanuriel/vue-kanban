@@ -1,21 +1,30 @@
 <template>
   <v-card class="kanban-card" elevation="2">
-  
+    <v-card-title class="card-title">
+      {{ props.card.title }}
+    </v-card-title>
 
-    <div class="button-group">
-      <v-btn
-      v-for="option in moveOptions"
-      :key="option.status"
-      @click="moveCard(option.status)"
-      small
-      color="secondary"
-      >
-      Move to {{ option.title }}
-    </v-btn>
-  </div>
-
-    <v-btn class="mt-2" color="warning" small @click = 'editCard'> Edit</v-btn>
-    <v-btn class="mt-2" color="error" small @click = 'deleteCard'> Delete</v-btn>
+    <v-card-subtitle>
+      {{ props.card.description }}
+    </v-card-subtitle>
+    <v-card-text>
+     
+      <div class="button-group">
+        <v-btn
+          v-for="option in moveOptions"
+          :key="option.status"
+          @click="moveCard(option.status)"
+          small
+          color="secondary"
+        >
+          Move to {{ option.title }}
+        </v-btn>
+      </div>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn color="warning" small @click="editCard">Edit</v-btn>
+      <v-btn color="error" small @click="deleteCard">Delete</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -61,16 +70,28 @@ const deleteCard = () => {
   border-radius: 8px;
   border: 1px solid #ddd;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.card-title {
+  font-size: 1rem; /* smaller than the column title */
+  font-weight: 600; /* still distinct */
+  margin-bottom: 4px;
 }
 
 .button-group {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  margin-bottom: 8px;
 }
 
 .v-btn {
   margin-right: 5px;
 }
+
+.card-content {
+  margin-bottom: 10px;
+}
+
 </style>

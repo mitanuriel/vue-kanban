@@ -1,7 +1,12 @@
 <template>
   <v-container fluid>
     <v-row class="kanban-board">
-      <v-col v-for="column in columns" :key="column.id" cols="4" class="kanban-column">
+      <v-col 
+      v-for="column in columns" 
+      :key="column.id" 
+      cols="auto" 
+      class="kanban-column"
+      >
         <KanbanColumn
           :title="column.title"
           :status="column.status"
@@ -9,7 +14,7 @@
           @move-card="moveCard"
           @delete-card="deleteCard"
           @edit-card="editCard"
-          @add-card="addCard(column.status)"
+          @add-card="() =>(column.status)"
         />
       </v-col>
     </v-row>
@@ -32,13 +37,19 @@ const columns = ref([
 ]);
 
 const cards = ref([
-  { id: 1, status: "todo" },
-  { id: 2, status: "in-progress" },
+{ id: 1, title: "My first task", description: "Some details...", status: "todo" },
+{ id: 2, title: "Another task", description: "Some other details...", status: "in-progress" },
 ]);
 
-const addCard = (status: string) => {
-  cards.value.push({ id: Date.now(), status });
-};
+
+function addCard(status: string) { 
+    cards.value.push({
+   id: Date.now(),
+   title: "New Task",
+   description: "Task details...",
+   status
+  });
+}
 
 const moveCard = (cardId: number, newStatus: string) => {
   const card = cards.value.find((c) => c.id === cardId);
@@ -58,13 +69,14 @@ const editCard = (cardId: number) => {
 .kanban-board {
   display: flex;
   gap: 20px;
-  justify-content: space-around;
+  justify-content: start;
   padding: 20px;
 }
 
 .kanban-column {
   flex: 1;
   min-width: 250px;
+  margin: 0 10px;
 }
 
 .add-card-btn {

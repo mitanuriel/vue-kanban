@@ -14,15 +14,10 @@
           @move-card="moveCard"
           @delete-card="deleteCard"
           @edit-card="editCard"
-          @add-card="() =>(column.status)"
+          @add-card="() => addCard(column.status)"
         />
       </v-col>
     </v-row>
-
-    <!-- New card button -->
-    <v-btn class="mt-4 add-card-btn" color="primary" @click="addCard('todo')">
-      Add New Card
-    </v-btn>
   </v-container>
 </template>
 

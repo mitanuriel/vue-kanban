@@ -67,23 +67,39 @@ const onEditCard = (cardId: number) => {
   border: 2px solid #ccc;
 }
 
-.column-title {
-  font-weight: bold;
-  font-size: 1.2rem;
-  margin-bottom: 8px;
+.column-wrapper {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding-bottom: 10px;
   text-align: center;
 }
 
-.column-header {
-  background-color: #3f51b5; /* Darker blue */
+.column-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  background-color:gray;
   color: white;
   padding: 12px;
   text-align: center;
-  font-weight: bold;
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px;
 }
 
-.card-list {
+.column-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   min-height: 400px;
 }
+.add-card-placeholder {
+ color: #555;
+ cursor: pointer;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+.add-card-placeholder:hover {
+  background-color: #e0e0e0;
+ }
+ 
 </style>

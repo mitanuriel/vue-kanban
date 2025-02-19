@@ -42,19 +42,20 @@ const cards = ref([
 ]);
 
 
-function addCard(status: string) { 
-    cards.value.push({
+//const moveCard = (cardId: number, newStatus: string) => {
+  //const card = cards.value.find((c) => c.id === cardId);
+  //if (card) card.status = newStatus;
+//};
+
+function addCard(status: string) {
+  // In a real app, you'd show a dialog or form to set title/description
+ cards.value.push({
    id: Date.now(),
    title: "New Task",
    description: "Task details...",
    status
-  });
+ });
 }
-
-const moveCard = (cardId: number, newStatus: string) => {
-  const card = cards.value.find((c) => c.id === cardId);
-  if (card) card.status = newStatus;
-};
 
 const deleteCard = (cardId: number) => {
   cards.value = cards.value.filter((card) => card.id !== cardId);

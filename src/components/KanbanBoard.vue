@@ -32,9 +32,11 @@ const columns = ref([
 ]);
 
 const cards = ref([
-{ id: 1, title: "My first task", description: "Some details...", status: "todo" },
-{ id: 2, title: "Another task", description: "Some other details...", status: "in-progress" },
+{ id: 1, title: "My first task", description: " Some details...", status: "todo" },
+{ id: 2, title: "Another task", description: " Some other details...", status: "in-progress" },
 ]);
+
+
 
 
 function moveCard(cardId: number, newStatus: string) {

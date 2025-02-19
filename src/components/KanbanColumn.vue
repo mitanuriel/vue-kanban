@@ -1,8 +1,8 @@
 <template>
  
  <div class="kanban-column">
-+    <v-card class="column-wrapper" elevation="2">
-+      <v-card-title class="column-title">{{ title }}</v-card-title>
+    <v-card class="column-wrapper" elevation="2">
+      <v-card-title class="column-title">{{ title }}</v-card-title>
 
       <v-card-text class="column-content">
        
@@ -101,5 +101,5 @@ const onEditCard = (cardId: number) => {
 .add-card-placeholder:hover {
   background-color: #e0e0e0;
  }
- 
+
 </style>

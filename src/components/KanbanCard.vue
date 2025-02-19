@@ -7,21 +7,29 @@
     <v-card-subtitle>
       {{ props.card.description }}
     </v-card-subtitle>
+
     <v-card-actions class="card-actions">
-     <div class="move-options">
-       <v-btn
+      <div class="move-options">
+        <v-btn
           v-for="option in moveOptions"
-         :key="option.status"
+          :key="option.status"
           @click="moveCard(option.status)"
-         small
-         color="secondary"
-       >
-+          Move to {{ option.title }}
-+        </v-btn>
-+      </div>
-<v-spacer></v-spacer>
-     <v-btn color="warning" small @click="editCard">Edit</v-btn>
-      <v-btn color="error" small @click="deleteCard">Delete</v-btn>
+          small
+          class="move-button"
+        >
+          Move to {{ option.title }}
+        </v-btn>
+      </div>
+      
+      <v-btn small class="edit-button" @click="onEditCard">
+        Edit
+      </v-btn>
+      <v-btn small class="delete-button" @click="onDeleteCard">
+        Delete
+      </v-btn>
+
+  
+  
     </v-card-actions>
   </v-card>
 </template>
@@ -32,6 +40,7 @@ import { defineProps, defineEmits, computed } from 'vue';
 const props = defineProps<{
   card: { id: number; title: string; description: string; status: string };
 }>();
+
 
 const emit = defineEmits<{
 (event: 'move-card', cardId: number, newStatus: string): void;
@@ -47,29 +56,30 @@ const moveOptions = computed(() => {
 
 
 //function to move the card
-
-const moveCard = (newStatus: string) => {
+function moveCard(newStatus: string) {
   emit('move-card', props.card.id, newStatus);
-};
+}
 
-const editCard = () => {
+// Emit edit event
+function onEditCard() {
   emit('edit-card', props.card.id);
-};
+}
 
-const deleteCard = () => {
+// Emit delete event
+function onDeleteCard() {
   emit('delete-card', props.card.id);
-};
+}
+
 </script>
 
 <style scoped>
 .kanban-card {
-  background-color: white;
+  background-color: #fff;
   padding: 15px;
   border-radius: 6px;
   border: 1px solid #ddd;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 16px;
-  
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .card-title {
@@ -98,6 +108,28 @@ const deleteCard = () => {
   gap: 5px;
   flex-wrap: wrap;
  }
+ .move-button {
+  font-size: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #555;
+  text-transform: none;
+}
+
+.move-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.edit-button,
+.delete-button {
+  font-size: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #555;
+  text-transform: none;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
 .card-content {
   margin-bottom: 10px;
 }

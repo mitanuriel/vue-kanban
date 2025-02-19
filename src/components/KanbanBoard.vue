@@ -1,10 +1,12 @@
 <template>
-  <v-container fluid>
-    <v-row class="kanban-board">
+  <v-container fluid class="kanban-background">
+    
+    <v-row dense class="kanban-board" no-gutters  style="gap: 0;">
       <v-col 
       v-for="column in columns" 
       :key="column.id" 
-      cols="auto" 
+      cols="12" 
+      md="4"
       class="kanban-column"
       >
         <KanbanColumn
@@ -116,12 +118,18 @@ function saveEdit(){
   gap: 20px;
   justify-content: start;
   padding: 20px;
+  margin: 4px !important;
+  padding: 0 !important;
+  gap: 20px;
+
 }
+  
 
 .kanban-column {
   flex: 1;
   min-width: 250px;
-  margin: 0 10px;
+  margin: 0 !important;
+ 
 }
 
 .add-card-btn {
@@ -137,5 +145,11 @@ function saveEdit(){
 
 .add-card-btn:hover {
   background-color: #388e3c !important;
+}
+
+.kanban-background {
+
+   background: linear-gradient(to bottom right, #564, #abfcb3);
+   
 }
 </style>

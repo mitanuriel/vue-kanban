@@ -65,10 +65,12 @@ const onEditCard = (cardId: number) => {
   padding: 15px;
   border-radius: 8px;
   border: 2px solid #ccc;
+  min-height: 600px;
+
 }
 
 .column-wrapper {
-  background-color: #f5f5f5;
+  background-color: #e4e7ea;;
   border-radius: 8px;
   padding-bottom: 10px;
   text-align: center;

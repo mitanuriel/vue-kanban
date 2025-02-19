@@ -7,22 +7,20 @@
     <v-card-subtitle>
       {{ props.card.description }}
     </v-card-subtitle>
-    <v-card-text>
-     
-      <div class="button-group">
-        <v-btn
+    <v-card-actions class="card-actions">
+     <div class="move-options">
+       <v-btn
           v-for="option in moveOptions"
-          :key="option.status"
+         :key="option.status"
           @click="moveCard(option.status)"
-          small
-          color="secondary"
-        >
-          Move to {{ option.title }}
-        </v-btn>
-      </div>
-    </v-card-text>
-    <v-card-actions>
-      <v-btn color="warning" small @click="editCard">Edit</v-btn>
+         small
+         color="secondary"
+       >
++          Move to {{ option.title }}
++        </v-btn>
++      </div>
+<v-spacer></v-spacer>
+     <v-btn color="warning" small @click="editCard">Edit</v-btn>
       <v-btn color="error" small @click="deleteCard">Delete</v-btn>
     </v-card-actions>
   </v-card>
@@ -67,10 +65,11 @@ const deleteCard = () => {
 .kanban-card {
   background-color: white;
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid #ddd;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 16px;
+  
 }
 
 .card-title {
@@ -79,17 +78,26 @@ const deleteCard = () => {
   margin-bottom: 4px;
 }
 
-.button-group {
+.card-header {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding-bottom: 0;
+}
+.card-subtitle {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.card-actions {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
+ }
+ .move-options {
+  display: flex;
   gap: 5px;
-  margin-bottom: 8px;
-}
-
-.v-btn {
-  margin-right: 5px;
-}
-
+  flex-wrap: wrap;
+ }
 .card-content {
   margin-bottom: 10px;
 }

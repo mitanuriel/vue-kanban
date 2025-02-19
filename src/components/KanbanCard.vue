@@ -27,9 +27,6 @@
       <v-btn small class="delete-button" @click="onDeleteCard">
         Delete
       </v-btn>
-
-  
-  
     </v-card-actions>
   </v-card>
 </template>

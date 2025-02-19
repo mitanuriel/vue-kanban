@@ -2,10 +2,12 @@
 
 <template>
   <v-app>
+    <v-main>
     <v-container>
       <h1 class="text-center kanban-title">Kanban Board</h1>
       <KanbanBoard />
     </v-container>
+  </v-main>
   </v-app>
 </template>
 

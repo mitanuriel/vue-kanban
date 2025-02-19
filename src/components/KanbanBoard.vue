@@ -18,6 +18,26 @@
         />
       </v-col>
     </v-row>
+
+    <v-dialog v-model="isEditDialogOpen" >
+     <v-card>
+       <v-card-title>Edit Card</v-card-title>
+         <v-card-text>
+           <v-text-field
+               v-model="editForm.title"
+                label="Title"
+           ></v-text-field>
+           <v-textarea
+              v-model="editForm.description"
+               label="Description"
+         ></v-textarea>
+         </v-card-text>
+         <v-card-actions>
+            <v-btn color="primary" @click="saveEdit">Save</v-btn>
+             <v-btn variant="text" @click="isEditDialogOpen = false">Cancel</v-btn>
+         </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -36,6 +56,10 @@ const cards = ref([
 { id: 2, title: "Another task", description: " Some other details...", status: "in-progress" },
 ]);
 
+//edit button form state
+const isEditDialogOpen = ref(false);
+const selectedCardId = ref<number | null>(null);
+const editForm = ref({title: "", description: ""});
 
 
 
@@ -60,9 +84,30 @@ const deleteCard = (cardId: number) => {
   cards.value = cards.value.filter((card) => card.id !== cardId);
 };
 
-const editCard = (cardId: number) => {
-  // Editing functionality if needed
-};
+//const editCard = (cardId: number) => {}
+
+function editCard(cardId:number) {
+  const card = cards.value.find (c => c.id === cardId);
+  if(card) {
+    selectedCardId.value = cardId;
+    editForm.value.title = card.title;
+    editForm.value.description = card.description;
+    isEditDialogOpen.value = true;
+  }
+}
+
+function saveEdit(){
+  if(selectedCardId.value != null) {
+    const card = cards.value.find(c => c.id === selectedCardId.value);
+    if(card) {
+      card.title = editForm.value.title;
+      card.description = editForm.value.description;
+    }
+  }
+  isEditDialogOpen.value = false;
+}
+  
+;
 </script>
 
 <style scoped>

@@ -10,7 +10,7 @@ import draggable from 'vuedraggable';
 //import './assets/main.css';
 //import './assets/base.css';
 
-const vuetify = createVuetify;
+const vuetify = createVuetify();
 const app = createApp(App)
 
 app.use(vuetify);

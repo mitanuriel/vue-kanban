@@ -20,6 +20,7 @@
           Move to {{ option.title }}
         </v-btn>
       </div>
+      <v-spacer></v-spacer>
       
       <v-btn small class="edit-button" @click="onEditCard">
         Edit
@@ -60,6 +61,7 @@ function moveCard(newStatus: string) {
 // Emit edit event
 function onEditCard() {
   emit('edit-card', props.card.id);
+  console.log("KanbanCard: Edit button clicked");
 }
 
 // Emit delete event

@@ -13,21 +13,32 @@
         <v-btn
           v-for="option in moveOptions"
           :key="option.status"
+          variant="text" 
+          size="small"
+          class="link-button"
           @click="moveCard(option.status)"
-          small
-          class="move-button"
+          
+        
         >
           Move to {{ option.title }}
         </v-btn>
       </div>
       <v-spacer></v-spacer>
       
-      <v-btn small class="edit-button" @click="onEditCard">
+      <div class="edit-delete"> 
+      <v-btn variant="text"
+        size="small"
+        class="link-button"
+        @click="onEditCard">
         Edit
       </v-btn>
-      <v-btn small class="delete-button" @click="onDeleteCard">
+      <v-btn  variant="text"
+        size="small"
+        class="link-button"
+        @click="onDeleteCard">
         Delete
       </v-btn>
+    </div>
     </v-card-actions>
   </v-card>
 </template>
@@ -101,28 +112,57 @@ function onDeleteCard() {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  justify-content:space-between; 
+  align-items: center;
+  padding: 2px; 
  }
  .move-options {
+  
   display: flex;
-  gap: 5px;
-  flex-wrap: wrap;
+  flex-direction: column; 
+  gap: 2px;
  }
+
+ .link-button {
+  font-size: 0.75rem; 
+  min-width: 0;      
+  padding: 0;         
+  margin: 0;
+  text-transform: none;
+  color: #666;        
+}
+.link-button:hover {
+  text-decoration: underline;
+  color: #333;
+}
+
  .move-button {
-  font-size: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.05);
+  font-size: xx-small;
+  padding: 1px 2px;
+  background-color: rgba(0,0,0,0.05);
   color: #555;
   text-transform: none;
+  border-radius: 4px;
 }
 
 .move-button:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.edit-delete {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.move-button,
 .edit-button,
 .delete-button {
-  font-size: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.05);
-  color: #555;
+
+  font-size: xx-small;
+  padding: 1px 2px;
+  background-color: rgba(0,0,0,0.05);
   text-transform: none;
+  border-radius: 4px;
 }
 
 .edit-button:hover,

@@ -5,16 +5,23 @@
       <v-card-title class="column-title">{{ title }}</v-card-title>
 
       <v-card-text class="column-content">
-       
-        <KanbanCard
-         v-for="card in cards"
-         :key="card.id"
-         :card="card"
-         @move-card="onMoveCard"
-         @delete-card="onDeleteCard"
-         @edit-card="onEditCard"
-         @view-description="onViewDescription"
+        <draggable 
+        :list="cards"
+          group="kanban"
+          item-key="id"
+          @change="onDragChange" 
+      >
+        <template #item="{ element }">
+          <KanbanCard
+          :card="element"
+           :key="element.id"
+          @move-card="onMoveCard"
+           @delete-card="onDeleteCard"
+           @edit-card="onEditCard"
+           @view-description="onViewDescription"
        />
+        </template>
+      </draggable>
 
        <div class="add-card-placeholder" @click="$emit('add-card')">
          Add a card...
@@ -29,7 +36,7 @@ import { defineProps, defineEmits } from 'vue';
 import KanbanCard from '@/components/KanbanCard.vue';
 
 //props from KanbanBoard
-defineProps<{
+const props = defineProps<{
   title: string;
   status: string;
   cards: { id: number; title: string; description: string; status: string }[];
@@ -59,6 +66,13 @@ const onEditCard = (cardId: number) => {
 
 function onViewDescription(cardId: number) {
   emit('view-description', cardId);
+}
+
+function onDragChange(event: any) {
+  if (event.added) {
+    const draggedCard = event.added.element;
+    draggedCard.status = props.status; 
+  }
 }
 
 </script>
@@ -109,5 +123,11 @@ function onViewDescription(cardId: number) {
 .add-card-placeholder:hover {
   background-color: #e0e0e0;
  }
+ .draggable-placeholder {
+  background: #ccc;
+  border: 1px dashed #999;
+  height: 80px; 
+  margin-bottom: 10px;
+}
 
 </style>

@@ -43,8 +43,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch, onMounted } from "vue";
 import KanbanColumn from "@/components/KanbanColumn.vue";
+
+interface Card {
+  id: number;
+  title: string;
+  description: string;
+  status: string;
+}
 
 const columns = ref([
   { id: 1, title: "To do", status: "todo" },
@@ -52,10 +59,26 @@ const columns = ref([
   { id: 3, title: "Done", status: "done" },
 ]);
 
-const cards = ref([
+const cards = ref<Card[]>([
 { id: 1, title: "My first task", description: " Some details...", status: "todo" },
 { id: 2, title: "Another task", description: " Some other details...", status: "in-progress" },
 ]);
+
+onMounted(() => {
+  const saved = localStorage.getItem('kanban-cards');
+  if (saved) {
+    cards.value = JSON.parse(saved) as Card[];
+  }
+});
+
+watch(
+  cards,
+  (newCards) => {
+    localStorage.setItem('kanban-cards', JSON.stringify(newCards));
+  },
+  { deep: true }
+);
+
 
 //edit button form state
 const isEditDialogOpen = ref(false);

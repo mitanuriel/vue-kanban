@@ -19,8 +19,12 @@ import KanbanBoard from './components/KanbanBoard.vue'
 <style scoped>
 
 .kanban-title {
+  font-family: 'Montserrat', sans-serif;
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 600;
   margin-bottom: 20px;
+  color: #fff;  /* white text */
+ text-align: center;
+ margin-top: 20px;
 }
 </style>

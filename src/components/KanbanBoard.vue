@@ -1,12 +1,11 @@
 <template>
   <v-container fluid class="kanban-background">
     
-    <v-row dense class="kanban-board" no-gutters  style="gap: 0;">
+    <v-row dense class="kanban-board"  style="gap: 0;">
       <v-col 
       v-for="column in columns" 
       :key="column.id" 
-      cols="12" 
-      md="4"
+      cols="auto" 
       class="kanban-column"
       >
         <KanbanColumn
@@ -149,7 +148,7 @@ function saveEdit(){
 
 .kanban-background {
 
-   background: linear-gradient(to bottom right, #564, #abfcb3);
+
    
 }
 </style>

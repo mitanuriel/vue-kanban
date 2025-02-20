@@ -70,7 +70,7 @@ const onEditCard = (cardId: number) => {
 }
 
 .column-wrapper {
-  background-color: #e4e7ea;;
+  background-color: #f2f2f2;;
   border-radius: 8px;
   padding-bottom: 10px;
   text-align: center;
@@ -79,7 +79,7 @@ const onEditCard = (cardId: number) => {
 .column-title {
   font-weight: 700;
   font-size: 1.1rem;
-  background-color:gray;
+  background-color: #2e3d2b;
   color: white;
   padding: 12px;
   text-align: center;

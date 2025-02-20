@@ -1,12 +1,13 @@
 @import './base.css';
 
 body {
-  background-color: white !important;
+  background-color: rgb(46, 77, 46) !important;
   color: black !important;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #app {
+  background-color: rgb(46, 77, 46) !important;
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
@@ -14,7 +15,8 @@ body {
 
 .kanban-board {
   display: flex;
-  justify-content: space-between;
+  background-color: rgb(46, 77, 46) !important;
+  justify-content:center;
   gap: 20px;
   padding: 20px;
 }
@@ -24,15 +26,8 @@ body {
   min-width: 200px;
 }
 
-.add-card-btn {
-  background-color: #4CAF50 !important;
-  color: white !important;
-  font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 6px;
-  transition: 0.3s;
-}
-
-.add-card-btn:hover {
-  background-color: #388E3C !important;
+.v-main {
+  
+  background-color: #2e3d2b; /* a deeper green */
+  min-height: 100vh;
 }

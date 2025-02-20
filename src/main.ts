@@ -9,8 +9,8 @@ import * as directives from 'vuetify/directives'
 
 
 
-//import './assets/main.css';
-//import './assets/base.css';
+import './assets/main.css';
+import './assets/base.css';
 
 const vuetify = createVuetify({
     components,

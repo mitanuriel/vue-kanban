@@ -13,6 +13,7 @@
          @move-card="onMoveCard"
          @delete-card="onDeleteCard"
          @edit-card="onEditCard"
+         @view-description="onViewDescription"
        />
 
        <div class="add-card-placeholder" @click="$emit('add-card')">
@@ -40,6 +41,7 @@ const emit = defineEmits<{
   (event: 'delete-card', cardId: number): void;
   (event: 'edit-card', cardId: number): void;
   (event: 'add-card'): void;
+  (event: 'view-description', cardId: number): void;
 }>();
 
 //function to pass move event to KanbanBoard
@@ -54,6 +56,10 @@ const onDeleteCard = (cardId: number) => {
 const onEditCard = (cardId: number) => {
   emit('edit-card', cardId);
 };
+
+function onViewDescription(cardId: number) {
+  emit('view-description', cardId);
+}
 
 </script>
 

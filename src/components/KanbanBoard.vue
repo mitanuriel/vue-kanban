@@ -16,11 +16,12 @@
           @delete-card="deleteCard"
           @edit-card="editCard"
           @add-card="() => addCard(column.status)"
+          @view-description="viewDescription"
         />
       </v-col>
     </v-row>
 
-    <v-dialog v-model="isEditDialogOpen" >
+    <v-dialog v-model="isEditDialogOpen" max-width="400">
      <v-card>
        <v-card-title>Edit Card</v-card-title>
          <v-card-text>
@@ -40,6 +41,18 @@
       </v-card>
     </v-dialog>
   </v-container>
+
+  <v-dialog v-model="isViewDialogOpen" max-width="400">
+  <v-card>
+    <v-card-title>Full Description</v-card-title>
+    <v-card-text>
+      <p>{{ viewDescriptionText }}</p>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn variant="text" size="small" @click="isViewDialogOpen = false">Close</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>
 </template>
 
 <script setup lang="ts">
@@ -84,7 +97,16 @@ watch(
 const isEditDialogOpen = ref(false);
 const selectedCardId = ref<number | null>(null);
 const editForm = ref({title: "", description: ""});
+const isViewDialogOpen = ref(false);
+const viewDescriptionText = ref("");
 
+function viewDescription(cardId: number) {
+  const card = cards.value.find(c => c.id === cardId);
+  if (card) {
+    viewDescriptionText.value = card.description;
+    isViewDialogOpen.value = true;
+  }
+}
 
 
 function moveCard(cardId: number, newStatus: string) {

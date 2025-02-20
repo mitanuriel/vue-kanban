@@ -32,6 +32,14 @@
         @click="onEditCard">
         Edit
       </v-btn>
+      <v-btn
+      variant="text"
+       size="small"
+       class="link-button"
+      @click="onViewDescription"
+     >
+       View
+     </v-btn>
       <v-btn  variant="text"
         size="small"
         class="link-button"
@@ -55,6 +63,7 @@ const emit = defineEmits<{
 (event: 'move-card', cardId: number, newStatus: string): void;
 (event: 'delete-card', cardId: number): void;
 (event: 'edit-card', cardId: number): void;
+(event: 'view-description', cardId: number): void;
 }>();
 
 const moveOptions = computed(() => {
@@ -78,6 +87,10 @@ function onEditCard() {
 // Emit delete event
 function onDeleteCard() {
   emit('delete-card', props.card.id);
+}
+
+function onViewDescription(){
+  emit('view-description', props.card.id);
 }
 
 </script>

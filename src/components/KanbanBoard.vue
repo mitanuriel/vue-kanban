@@ -146,9 +146,4 @@ function saveEdit(){
   background-color: #388e3c !important;
 }
 
-.kanban-background {
-
-
-   
-}
 </style>

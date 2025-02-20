@@ -93,6 +93,8 @@ function onDeleteCard() {
 }
 
 .card-title {
+  white-space: normal;
+  overflow-wrap: break-word;
   font-size: 1rem; /* smaller than the column title */
   font-weight: 600; /* still distinct */
   margin-bottom: 4px;
@@ -106,6 +108,8 @@ function onDeleteCard() {
 .card-subtitle {
   font-size: 0.85rem;
   color: #666;
+  white-space: normal;    
+  overflow-wrap: break-word;
 }
 
 .card-actions {

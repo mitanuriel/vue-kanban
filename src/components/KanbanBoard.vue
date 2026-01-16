@@ -21,35 +21,40 @@
       </v-col>
     </v-row>
 
-    <v-dialog v-model="isEditDialogOpen" max-width="400">
-     <v-card>
-       <v-card-title>Edit Card</v-card-title>
+    <v-dialog v-model="isEditDialogOpen" max-width="500">
+     <v-card class="modern-dialog">
+       <v-card-title class="dialog-title">Edit Card</v-card-title>
          <v-card-text>
            <v-text-field
                v-model="editForm.title"
                 label="Title"
+                variant="outlined"
+                color="primary"
            ></v-text-field>
            <v-textarea
               v-model="editForm.description"
                label="Description"
+               variant="outlined"
+               color="primary"
+               rows="4"
          ></v-textarea>
          </v-card-text>
-         <v-card-actions>
-            <v-btn color="primary" @click="saveEdit">Save</v-btn>
+         <v-card-actions class="dialog-actions">
+            <v-btn color="primary" variant="elevated" @click="saveEdit">Save Changes</v-btn>
              <v-btn variant="text" @click="isEditDialogOpen = false">Cancel</v-btn>
          </v-card-actions>
       </v-card>
     </v-dialog>
   </v-container>
 
-  <v-dialog v-model="isViewDialogOpen" max-width="400">
-  <v-card>
-    <v-card-title>Full Description</v-card-title>
-    <v-card-text>
+  <v-dialog v-model="isViewDialogOpen" max-width="500">
+  <v-card class="modern-dialog">
+    <v-card-title class="dialog-title">Card Details</v-card-title>
+    <v-card-text class="dialog-content">
       <p>{{ viewDescriptionText }}</p>
     </v-card-text>
-    <v-card-actions>
-      <v-btn variant="text" size="small" @click="isViewDialogOpen = false">Close</v-btn>
+    <v-card-actions class="dialog-actions">
+      <v-btn variant="elevated" color="primary" @click="isViewDialogOpen = false">Close</v-btn>
     </v-card-actions>
   </v-card>
 </v-dialog>
@@ -157,23 +162,48 @@ function saveEdit(){
 </script>
 
 <style scoped>
+.kanban-background {
+  background: transparent;
+}
+
 .kanban-board {
   display: flex;
-  gap: 20px;
-  justify-content: start;
-  padding: 20px;
-  margin: 4px !important;
-  padding: 0 !important;
-  gap: 20px;
-
+  gap: 24px;
+  justify-content: center;
+  padding: 0;
+  margin: 0 !important;
 }
   
-
 .kanban-column {
-  flex: 1;
-  min-width: 250px;
+  flex: 0 1 auto;
+  min-width: 320px;
+  max-width: 380px;
   margin: 0 !important;
- 
+}
+
+.modern-dialog {
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+}
+
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 24px 24px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.dialog-content {
+  padding: 24px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #4a5568;
+}
+
+.dialog-actions {
+  padding: 16px 24px 24px;
+  gap: 12px;
 }
 
 .add-card-btn {

@@ -1,62 +1,69 @@
 <template>
-  <v-card class="kanban-card" elevation="2">
-    <div class="drag-handle">⋮⋮</div>
-    <v-card-title class="card-title">
-      {{ props.card.title }}
-    </v-card-title>
+  <v-card class="kanban-card" elevation="0">
+    <div class="card-header">
+      <div class="drag-handle">⋮⋮</div>
+      <h3 class="card-title">{{ props.card.title }}</h3>
+    </div>
 
-    <v-card-subtitle>
+    <p class="card-description">
       {{ props.card.description }}
-    </v-card-subtitle>
+    </p>
 
     <v-card-actions class="card-actions">
-      <div class="move-options">
+      <div class="action-buttons">
         <v-btn
           v-for="option in moveOptions"
           :key="option.status"
           variant="text" 
-          size="small"
-          class="link-button"
+          size="x-small"
+          class="action-btn move-btn"
           @click="moveCard(option.status)"
         >
-          Move to {{ option.title }}
+          → {{ option.title }}
         </v-btn>
       </div>
+      
       <v-spacer></v-spacer>
       
-      <div class="edit-delete"> 
-      <v-btn variant="text"
-        size="small"
-        class="link-button"
-        @click="onEditCard">
-        Edit
-      </v-btn>
-      <v-btn
-      variant="text"
-       size="small"
-       class="link-button"
-      @click="onViewDescription"
-     >
-       View
-     </v-btn>
-      <v-btn  variant="text"
-        size="small"
-        class="link-button"
-        @click="onDeleteCard">
-        Delete
-      </v-btn>
-    </div>
+      <div class="utility-buttons"> 
+        <v-btn
+          variant="text"
+          size="x-small"
+          class="action-btn"
+          @click="onViewDescription"
+          title="View"
+        >
+          View
+        </v-btn>
+        <v-btn
+          variant="text"
+          size="x-small"
+          class="action-btn"
+          @click="onEditCard"
+          title="Edit"
+        >
+          Edit
+        </v-btn>
+        <v-btn
+          variant="text"
+          size="x-small"
+          class="action-btn delete-btn"
+          @click="onDeleteCard"
+          title="Delete"
+        >
+          Delete
+        </v-btn>
+      </div>
     </v-card-actions>
   </v-card>
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps<{
   card: { id: number; title: string; description: string; status: string };
 }>();
-
 
 const emit = defineEmits<{
 (event: 'move-card', cardId: number, newStatus: string): void;
@@ -96,114 +103,102 @@ function onViewDescription(){
 
 <style scoped>
 .kanban-card {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(203, 213, 224, 0.5);
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   position: relative;
   cursor: move;
+  transition: all 0.2s ease;
 }
 
-.card-title {
-  white-space: normal;
-  overflow-wrap: break-word;
-  font-size: 1rem; /* smaller than the column title */
-  font-weight: 600; /* still distinct */
-  margin-bottom: 4px;
+.kanban-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+  border-color: rgba(102, 126, 234, 0.3);
 }
 
 .card-header {
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding-bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 12px;
 }
-.card-subtitle {
-  font-size: 0.85rem;
-  color: #666;
-  white-space: normal;    
-  overflow-wrap: break-word;
+
+.card-title {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: #718096;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+  word-wrap: break-word;
 }
 
 .card-actions {
   display: flex;
   align-items: center;
+  padding: 8px 0 0 0;
+  border-top: 1px solid rgba(203, 213, 224, 0.3);
+  gap: 8px;
+}
+
+.action-buttons,
+.utility-buttons {
+  display: flex;
+  gap: 4px;
   flex-wrap: wrap;
-  justify-content:space-between; 
-  align-items: center;
-  padding: 2px; 
- }
- .move-options {
-  
-  display: flex;
-  flex-direction: column; 
-  gap: 2px;
- }
+}
 
- .link-button {
-  font-size: 0.75rem; 
-  min-width: 0;      
-  padding: 0;         
-  margin: 0;
+.action-btn {
+  font-size: 0.75rem;
+  min-width: 0;
+  padding: 4px 8px;
   text-transform: none;
-  color: #666;        
-}
-.link-button:hover {
-  text-decoration: underline;
-  color: #333;
+  color: #718096;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
- .move-button {
-  font-size: xx-small;
-  padding: 1px 2px;
-  background-color: rgba(0,0,0,0.05);
-  color: #555;
-  text-transform: none;
-  border-radius: 4px;
+.action-btn:hover {
+  background-color: rgba(102, 126, 234, 0.1);
+  color: #667eea;
 }
 
-.move-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+.move-btn {
+  font-weight: 500;
 }
 
-.edit-delete {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.move-button,
-.edit-button,
-.delete-button {
-
-  font-size: xx-small;
-  padding: 1px 2px;
-  background-color: rgba(0,0,0,0.05);
-  text-transform: none;
-  border-radius: 4px;
-}
-
-.edit-button:hover,
-.delete-button:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.card-content {
-  margin-bottom: 10px;
+.delete-btn:hover {
+  background-color: rgba(245, 101, 101, 0.1);
+  color: #f56565;
 }
 
 .drag-handle {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 1.2rem;
-  color: #999;
+  font-size: 1rem;
+  color: #cbd5e0;
   cursor: grab;
   user-select: none;
   letter-spacing: -2px;
+  transition: color 0.2s ease;
+  padding: 2px;
+}
+
+.drag-handle:hover {
+  color: #667eea;
 }
 
 .drag-handle:active {
   cursor: grabbing;
 }
-
 </style>

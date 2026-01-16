@@ -1,14 +1,15 @@
 <template>
  
  <div class="kanban-column">
-    <v-card class="column-wrapper" elevation="2">
+    <v-card class="column-wrapper" elevation="0">
       <v-card-title class="column-title">{{ title }}</v-card-title>
 
       <v-card-text class="column-content">
         <VueDraggable 
           v-model="localCards"
           group="kanban"
-          :animation="150"
+          :animation="200"
+          class="draggable-area"
         >
           <KanbanCard
             v-for="element in localCards"
@@ -22,7 +23,7 @@
         </VueDraggable>
 
        <div class="add-card-placeholder" @click="$emit('add-card')">
-         Add a card...
+         <span class="add-icon">+</span> Add a card
        </div>
      </v-card-text>
     </v-card>
@@ -101,55 +102,76 @@ function onViewDescription(cardId: number) {
 
 <style scoped>
 .kanban-column {
-  width: 300px;
-  min-height: 600px;
-  background-color: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  border: 2px solid #ccc;
-  min-height: 600px;
-
+  width: 100%;
+  min-height: 500px;
+  transition: transform 0.2s ease;
 }
 
 .column-wrapper {
-  background-color: #f2f2f2;;
-  border-radius: 8px;
-  padding-bottom: 10px;
-  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.column-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
 }
 
 .column-title {
   font-weight: 700;
   font-size: 1.1rem;
-  background-color: #2e3d2b;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 12px;
+  padding: 20px;
   text-align: center;
-  border-radius: 6px;
+  border-radius: 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-size: 0.95rem;
 }
 
 .column-content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding: 16px;
   min-height: 400px;
-}
-.add-card-placeholder {
- color: #555;
- cursor: pointer;
-  padding: 8px;
-  margin-top: 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-.add-card-placeholder:hover {
-  background-color: #e0e0e0;
- }
- .draggable-placeholder {
-  background: #ccc;
-  border: 1px dashed #999;
-  height: 80px; 
-  margin-bottom: 10px;
+  background: transparent;
 }
 
+.draggable-area {
+  min-height: 350px;
+}
+
+.add-card-placeholder {
+  color: #718096;
+  cursor: pointer;
+  padding: 16px;
+  margin-top: 12px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  text-align: center;
+  border: 2px dashed #cbd5e0;
+  background: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.add-card-placeholder:hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: #667eea;
+  color: #667eea;
+  transform: translateY(-2px);
+}
+
+.add-icon {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
 </style>

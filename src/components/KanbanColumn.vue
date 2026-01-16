@@ -6,13 +6,12 @@
 
       <v-card-text class="column-content">
         <VueDraggable 
-          :modelValue="props.cards"
+          v-model="localCards"
           group="kanban"
           :animation="150"
-          @end="onDragEnd" 
         >
           <KanbanCard
-            v-for="element in props.cards"
+            v-for="element in localCards"
             :card="element"
             :key="element.id"
             @move-card="onMoveCard"
@@ -31,6 +30,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, watch, nextTick } from 'vue';
 import KanbanCard from '@/components/KanbanCard.vue';
 import { VueDraggable } from 'vue-draggable-plus';
 
@@ -50,6 +50,36 @@ const emit = defineEmits<{
   (event: 'view-description', cardId: number): void;
 }>();
 
+// Create a local reactive copy for dragging
+const localCards = ref([...props.cards]);
+let isUpdatingFromParent = false;
+
+// Watch for changes from parent and update local copy
+watch(() => props.cards, (newCards) => {
+  isUpdatingFromParent = true;
+  localCards.value = [...newCards];
+  nextTick(() => {
+    isUpdatingFromParent = false;
+  });
+}, { deep: true });
+
+// Watch for local changes and emit to parent
+watch(localCards, (newLocalCards, oldLocalCards) => {
+  // Skip if update came from parent
+  if (isUpdatingFromParent) {
+    return;
+  }
+  
+  // Check if a card was added (moved from another column)
+  const addedCard = newLocalCards.find(newCard => 
+    !oldLocalCards.some(oldCard => oldCard.id === newCard.id)
+  );
+  
+  if (addedCard) {
+    emit('move-card', addedCard.id, props.status);
+  }
+}, { deep: true });
+
 //function to pass move event to KanbanBoard
 const onMoveCard = (cardId: number, newStatus: string) => {
   emit('move-card', cardId, newStatus);
@@ -65,15 +95,6 @@ const onEditCard = (cardId: number) => {
 
 function onViewDescription(cardId: number) {
   emit('view-description', cardId);
-}
-
-function onDragEnd(event: any) {
-  if (event.to !== event.from) {
-    const cardId = parseInt(event.item.dataset.cardId || '0');
-    if (cardId) {
-      emit('move-card', cardId, props.status);
-    }
-  }
 }
 
 </script>

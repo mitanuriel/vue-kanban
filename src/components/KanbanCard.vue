@@ -1,5 +1,6 @@
 <template>
   <v-card class="kanban-card" elevation="2">
+    <div class="drag-handle">⋮⋮</div>
     <v-card-title class="card-title">
       {{ props.card.title }}
     </v-card-title>
@@ -17,8 +18,6 @@
           size="small"
           class="link-button"
           @click="moveCard(option.status)"
-          
-        
         >
           Move to {{ option.title }}
         </v-btn>
@@ -103,6 +102,8 @@ function onViewDescription(){
   border: 1px solid #ddd;
   margin-bottom: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
+  cursor: move;
 }
 
 .card-title {
@@ -188,6 +189,21 @@ function onViewDescription(){
 }
 .card-content {
   margin-bottom: 10px;
+}
+
+.drag-handle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: grab;
+  user-select: none;
+  letter-spacing: -2px;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
 }
 
 </style>

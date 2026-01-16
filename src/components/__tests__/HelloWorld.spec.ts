@@ -1,11 +1,15 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import HelloWorld from '../HelloWorld.vue'
+import KanbanCard from '../KanbanCard.vue'
 
-describe('HelloWorld', () => {
+describe('KanbanCard', () => {
   it('renders properly', () => {
-    const wrapper = mount(HelloWorld, { props: { msg: 'Hello Vitest' } })
-    expect(wrapper.text()).toContain('Hello Vitest')
+    const wrapper = mount(KanbanCard, { 
+      props: { 
+        card: { id: 1, title: 'Test Card', description: 'Test description', status: 'todo' }
+      } 
+    })
+    expect(wrapper.text()).toContain('Test Card')
   })
 })

@@ -5,23 +5,22 @@
       <v-card-title class="column-title">{{ title }}</v-card-title>
 
       <v-card-text class="column-content">
-        <draggable 
-        :list="cards"
+        <VueDraggable 
+          :modelValue="props.cards"
           group="kanban"
-          item-key="id"
-          @change="onDragChange" 
-      >
-        <template #item="{ element }">
+          :animation="150"
+          @end="onDragEnd" 
+        >
           <KanbanCard
-          :card="element"
-           :key="element.id"
-          @move-card="onMoveCard"
-           @delete-card="onDeleteCard"
-           @edit-card="onEditCard"
-           @view-description="onViewDescription"
-       />
-        </template>
-      </draggable>
+            v-for="element in props.cards"
+            :card="element"
+            :key="element.id"
+            @move-card="onMoveCard"
+            @delete-card="onDeleteCard"
+            @edit-card="onEditCard"
+            @view-description="onViewDescription"
+          />
+        </VueDraggable>
 
        <div class="add-card-placeholder" @click="$emit('add-card')">
          Add a card...
@@ -32,8 +31,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
 import KanbanCard from '@/components/KanbanCard.vue';
+import { VueDraggable } from 'vue-draggable-plus';
 
 //props from KanbanBoard
 const props = defineProps<{
@@ -68,10 +67,12 @@ function onViewDescription(cardId: number) {
   emit('view-description', cardId);
 }
 
-function onDragChange(event: any) {
-  if (event.added) {
-    const draggedCard = event.added.element;
-    draggedCard.status = props.status; 
+function onDragEnd(event: any) {
+  if (event.to !== event.from) {
+    const cardId = parseInt(event.item.dataset.cardId || '0');
+    if (cardId) {
+      emit('move-card', cardId, props.status);
+    }
   }
 }
 
